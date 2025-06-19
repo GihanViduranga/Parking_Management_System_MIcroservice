@@ -1,11 +1,16 @@
+/*
+ * Copyright (c) 2025
+ * Gihan Viduranga - 2025
+ */
+
 package lk.ijse.userauthservice.service.impl;
 
 import jakarta.transaction.Transactional;
-import lk.ijse.authservice.dto.UserDto;
-import lk.ijse.authservice.entity.User;
-import lk.ijse.authservice.repo.UserRepository;
-import lk.ijse.authservice.service.UserService;
-import lk.ijse.authservice.util.VarList;
+import lk.ijse.userauthservice.dto.UserDto;
+import lk.ijse.userauthservice.entity.User;
+import lk.ijse.userauthservice.repo.UserRepository;
+import lk.ijse.userauthservice.service.UserService;
+import lk.ijse.userauthservice.util.VarList;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

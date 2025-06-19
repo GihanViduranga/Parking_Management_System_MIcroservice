@@ -1,11 +1,17 @@
+/*
+ * Copyright (c) 2025
+ * Gihan Viduranga - 2025
+ */
+
 package lk.ijse.userauthservice.controller;
 
-import lk.ijse.authservice.dto.AuthDTO;
-import lk.ijse.authservice.dto.ResponseDTO;
-import lk.ijse.authservice.dto.UserDto;
-import lk.ijse.authservice.service.UserService;
-import lk.ijse.authservice.util.JwtUtil;
-import lk.ijse.authservice.util.VarList;
+
+import lk.ijse.userauthservice.dto.AuthDTO;
+import lk.ijse.userauthservice.dto.ResponseDTO;
+import lk.ijse.userauthservice.dto.UserDto;
+import lk.ijse.userauthservice.service.UserService;
+import lk.ijse.userauthservice.util.JwtUtil;
+import lk.ijse.userauthservice.util.VarList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

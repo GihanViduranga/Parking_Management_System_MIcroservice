@@ -1,9 +1,14 @@
+/*
+ * Copyright (c) 2025
+ * Gihan Viduranga - 2025
+ */
+
 package lk.ijse.userauthservice.util;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lk.ijse.authservice.dto.UserDto;
+import lk.ijse.userauthservice.dto.UserDto;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.security.core.userdetails.UserDetails;

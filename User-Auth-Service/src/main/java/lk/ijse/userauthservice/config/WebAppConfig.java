@@ -1,3 +1,8 @@
+/*
+ * Copyright (c) 2025
+ * Gihan Viduranga - 2025
+ */
+
 package lk.ijse.userauthservice.config;
 
 import org.modelmapper.ModelMapper;

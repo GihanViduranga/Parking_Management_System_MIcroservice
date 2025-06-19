@@ -1,6 +1,12 @@
+/*
+ * Copyright (c) 2025
+ * Gihan Viduranga - 2025
+ */
+
 package lk.ijse.userauthservice.repo;
 
-import lk.ijse.authservice.entity.User;
+
+import lk.ijse.userauthservice.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
