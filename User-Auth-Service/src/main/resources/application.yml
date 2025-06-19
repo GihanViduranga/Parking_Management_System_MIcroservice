@@ -1,0 +1,13 @@
+server:
+    port: 8082
+    servlet:
+        context-path: /user-auth-service
+
+spring:
+    application:
+        name: user-auth-service
+
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: http://localhost:8081/eureka
