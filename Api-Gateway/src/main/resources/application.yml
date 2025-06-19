@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    loadbalancer:
+      rule: random
+
+    gateway:
+      routes:
+        - id: user-auth-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/user-auth-service/**
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8081/eureka
