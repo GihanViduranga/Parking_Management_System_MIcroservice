@@ -1,13 +1,16 @@
 server:
-    port: 8082
-    servlet:
-        context-path: /user-auth-service
+  port: 8082
+  servlet:
+    context-path: /user-auth-service
 
 spring:
-    application:
-        name: user-auth-service
+  application:
+    name: user-auth-service
+  cloud:
+    config:
+      enabled: false
 
 eureka:
-    client:
-      serviceUrl:
-        defaultZone: http://localhost:8081/eureka
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka

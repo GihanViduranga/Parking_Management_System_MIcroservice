@@ -9,10 +9,16 @@ import jakarta.validation.Valid;
 import lk.ijse.userauthservice.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.List;
+
 
 public interface UserService {
-    int saveUser(UserDto userDTO);
 
-    UserDto loadUserDetailsByUsername(String email);
+    boolean updateUser(UserDto userDTO);
 
+    List<UserDto> getAllUsers();
+
+    boolean registerUser(UserDto userDTO);
+
+    UserDto loginUser(UserDto userDTO);
 }

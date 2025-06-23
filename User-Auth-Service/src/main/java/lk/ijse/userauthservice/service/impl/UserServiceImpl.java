@@ -10,23 +10,18 @@ import lk.ijse.userauthservice.dto.UserDto;
 import lk.ijse.userauthservice.entity.User;
 import lk.ijse.userauthservice.repo.UserRepository;
 import lk.ijse.userauthservice.service.UserService;
-import lk.ijse.userauthservice.util.VarList;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 @Transactional
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
@@ -34,37 +29,53 @@ public class UserServiceImpl implements UserDetailsService, UserService {
     @Autowired
     private ModelMapper modelMapper;
 
+
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
-        return new org.springframework.security.core.userdetails.User(
-                user.getEmail(),
-                user.getPassword(),
-                getAuthority(user)
-        );
-    }
-    private Set<SimpleGrantedAuthority> getAuthority(User user) {
-        Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-        authorities.add(new SimpleGrantedAuthority(user.getRole()));
-        return authorities;
+    public boolean updateUser(UserDto userDTO) {
+        Optional<User> existingUser = userRepository.findById(String.valueOf(userDTO.getId()));
+        if (existingUser.isPresent()) {
+            User user = existingUser.get();
+            user.setUsername(userDTO.getUsername());
+            user.setDateOfBirth(userDTO.getDateOfBirth());
+            user.setEmail(userDTO.getEmail());
+
+            if (!userDTO.getPassword().isEmpty()) {
+                BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+                user.setPassword(passwordEncoder.encode(userDTO.getPassword()));
+            }
+
+            user.setRole(userDTO.getRole());
+
+            userRepository.save(user);
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public int saveUser(UserDto userDTO) {
+    public List<UserDto> getAllUsers() {
+        return modelMapper.map(userRepository.findAll(),
+                new TypeToken<List<UserDto>>() {}.getType());
+    }
+
+    @Override
+    public boolean registerUser(UserDto userDTO) {
         if (userRepository.existsByEmail(userDTO.getEmail())) {
-            return VarList.Not_Acceptable;
+            return false;
         } else {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             userDTO.setPassword(passwordEncoder.encode(userDTO.getPassword()));
             userRepository.save(modelMapper.map(userDTO, User.class));
-            return VarList.Created;
+            return true;
         }
     }
 
     @Override
-    public UserDto loadUserDetailsByUsername(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
-        return modelMapper.map(user, UserDto.class);
+    public UserDto loginUser(UserDto userDTO) {
+        if (userRepository.existsByEmail(userDTO.getEmail())) {
+            return modelMapper.map(userRepository.findByEmail(userDTO.getEmail()), UserDto.class);
+        } else {
+            return null;
+        }
     }
 }

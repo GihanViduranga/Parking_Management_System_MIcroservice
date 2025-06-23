@@ -16,6 +16,8 @@ import lombok.Setter;
 @Setter
 public class UserDto {
     private int id;
+    private String username;
+    private String dateOfBirth;
     private String email;
     private String password;
     private String role;
