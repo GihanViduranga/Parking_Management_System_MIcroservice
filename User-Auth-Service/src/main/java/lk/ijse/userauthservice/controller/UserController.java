@@ -81,4 +81,22 @@ public class UserController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
     }
+
+    @GetMapping(value = "checkUserEmail/{email}")
+    public ResponseEntity<ResponseDTO> checkUserEmail(@PathVariable String email) {
+        try {
+            boolean isEmailExists = userService.checkUserEmail(email);
+            System.out.println(isEmailExists);
+            if (isEmailExists) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseDTO(VarList.Found, "Email exists", true));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "Email does not exist", false));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
 }

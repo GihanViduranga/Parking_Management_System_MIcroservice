@@ -21,4 +21,6 @@ public interface UserService {
     boolean registerUser(UserDto userDTO);
 
     UserDto loginUser(UserDto userDTO);
+
+    boolean checkUserEmail(String email);
 }

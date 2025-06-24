@@ -78,4 +78,14 @@ public class UserServiceImpl implements UserService {
             return null;
         }
     }
+
+    @Override
+    public boolean checkUserEmail(String email) {
+        boolean isEmailExists = userRepository.existsByEmail(email);
+        if (isEmailExists) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
