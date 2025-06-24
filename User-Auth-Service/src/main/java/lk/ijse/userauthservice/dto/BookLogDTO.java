@@ -6,6 +6,7 @@
 package lk.ijse.userauthservice.dto;
 
 
+import lk.ijse.userauthservice.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,9 +17,10 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Data
 public class BookLogDTO {
-    private String BookingId;
+    private int BookingId;
     private String vehicleId;
-    private String parkingSpaceId;
+    private int parkingSpaceId;
+    private String userEmail;
     private LocalDateTime reservedAt;
     private LocalDateTime releasedAt;
 }

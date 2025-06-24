@@ -5,10 +5,7 @@
 
 package lk.ijse.userauthservice.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,12 +18,13 @@ import java.time.LocalDateTime;
 @Entity
 public class BookingLog {
     @Id
-    private String BookingId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int BookingId;
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_email", nullable = false)
     private User user;
     private String vehicleId;
-    private String parkingSpaceId;
+    private int parkingSpaceId;
 
     private LocalDateTime reservedAt;
     private LocalDateTime releasedAt;
