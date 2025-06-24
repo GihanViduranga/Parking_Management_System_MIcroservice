@@ -17,6 +17,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ParkingServiceImpl implements ParkingService {
 
@@ -28,7 +31,7 @@ public class ParkingServiceImpl implements ParkingService {
 
     @Override
     public boolean createSpace(ParkingSpaceDTO parkingSpaceDTO) {
-        if (parkingRepo.existsById(parkingSpaceDTO.getId())) {
+        if (parkingRepo.existsBySpotNumber(parkingSpaceDTO.getSpotNumber())) {
             return false;
         }
 
@@ -40,6 +43,37 @@ public class ParkingServiceImpl implements ParkingService {
         }
         parkingRepo.save(modelMapper.map(parkingSpaceDTO, ParkingSpace.class));
         return true;
+    }
+
+    @Override
+    public List<ParkingSpaceDTO> getAllSpaces() {
+        List<ParkingSpace> parkingSpaces = parkingRepo.findAll();
+        return parkingSpaces.stream()
+                .map(user -> modelMapper.map(user, ParkingSpaceDTO.class))
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public ParkingSpaceDTO setAvailableParkingSpace(ParkingSpaceDTO parkingSpaceDTO) {
+        ParkingSpace parkingSpace = parkingRepo.findBySpotNumber(parkingSpaceDTO.getSpotNumber());
+
+        if (parkingSpace != null) {
+            System.out.println(parkingSpaceDTO.isAvailable());
+            parkingSpace.setAvailable(parkingSpaceDTO.isAvailable());
+            parkingRepo.save(parkingSpace);
+            return modelMapper.map(parkingSpace, ParkingSpaceDTO.class);
+        }
+
+        return null;
+    }
+
+    @Override
+    public boolean checkSpotNumber(ParkingSpaceDTO parkingSpaceDTO) {
+        if (parkingRepo.existsBySpotNumber(parkingSpaceDTO.getSpotNumber())) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public boolean checkUserEmail(String email) {

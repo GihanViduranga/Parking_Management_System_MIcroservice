@@ -14,9 +14,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ParkingSpaceDTO {
-    String id;
-    String location;
-    boolean isAvailable;
-    String userEmail;
-    String zone;
+    private int id;
+    private int spotNumber;
+    private String location;
+    private boolean isAvailable;
+    private String userEmail;
+    private String zone;
 }

@@ -10,5 +10,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ParkingRepo extends JpaRepository<ParkingSpace, String> {
+public interface ParkingRepo extends JpaRepository<ParkingSpace, Integer> {
+    //boolean existsByUniqSpot(String parkingSpot);
+    boolean existsBySpotNumber(int spotNumber);
+
+    //ParkingSpace existsParkingSpot(String parkingSpot);
+    ParkingSpace findBySpotNumber(int spotNumber);
+
 }
