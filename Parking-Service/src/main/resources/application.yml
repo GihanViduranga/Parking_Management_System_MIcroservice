@@ -1,0 +1,16 @@
+server:
+  port: 8084
+  servlet:
+    context-path: /parking-service
+
+spring:
+  application:
+    name: parking-service
+  cloud:
+    config:
+      enabled: false
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8081/eureka
