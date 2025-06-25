@@ -45,8 +45,15 @@ public class VehicleController {
     @PostMapping("/parkVehicle")
     public ResponseEntity<ResponseDTO> parkVehicle(@RequestBody VehicleDTO vehicleDTO) {
         try {
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDTO(VarList.Created, "Vehicle Parked Successfully", vehicleService.parkVehicle(vehicleDTO)));
+            VehicleDTO isParkVehicle = vehicleService.parkVehicle(vehicleDTO);
+            if (isParkVehicle != null){
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseDTO(VarList.Created, "Vehicle Parked Successfully", isParkVehicle));
+            }else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "Plate number not exists", null));
+            }
+
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));

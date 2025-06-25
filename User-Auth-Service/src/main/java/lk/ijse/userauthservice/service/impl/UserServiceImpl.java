@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean updateUser(UserDto userDTO) {
-        Optional<User> existingUser = userRepository.findById(String.valueOf(userDTO.getId()));
+        Optional<User> existingUser = userRepository.findByEmail(userDTO.getEmail());
         if (existingUser.isPresent()) {
             User user = existingUser.get();
             user.setUsername(userDTO.getUsername());

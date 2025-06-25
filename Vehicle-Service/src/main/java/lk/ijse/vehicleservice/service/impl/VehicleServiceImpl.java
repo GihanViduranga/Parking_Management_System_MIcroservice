@@ -50,7 +50,6 @@ public class VehicleServiceImpl implements VehicleService {
         if (existingVehicle != null) {
             existingVehicle.setParked(vehicleDTO.isParked());
             vehicleRepo.save(existingVehicle);
-
             return modelMapper.map(existingVehicle, VehicleDTO.class);
         }
 
