@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "824141b7-286d-4231-98af-7006e558ab99",
+		"name": "SPMS-Microservice",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "40382994"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "UserRegistration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"\",\r\n  \"username\": \"joni\",\r\n  \"dateOfBirth\": \"1998-08-04\",\r\n  \"email\": \"joni@example.com\",\r\n  \"password\": \"123456\",\r\n  \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/user-auth-service/api/v1/user/register"
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"jone@example.com\",\r\n  \"password\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/user-auth-service/api/v1/user/login"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllUsers",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": "http://localhost:8080/user-auth-service/api/v1/user/allUsers"
+					},
+					"response": []
+				},
+				{
+					"name": "GetUserIds",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": {
+								"token": "eyJhbGciOiJIUzUxMiJ9.eyJyb2xlIjoiVVNFUiIsInN1YiI6IlRlc3RAZXhhbXBsZS5jb20iLCJpYXQiOjE3NTAyNDY4NjYsImV4cCI6MTc1MTI4MzY2Nn0.PITpapzXoLqTdwxu3H-6cWdfAOhvZbHCAB_mxR9lKWPfjXQrE7ojLqczV39-TTNeGcnAtEb2hXNYmIWccvgOOw"
+							}
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"\",\r\n  \"username\": \"joni walker\",\r\n  \"dateOfBirth\": \"1998-08-04\",\r\n  \"email\": \"joni@example.com\",\r\n  \"password\": \"123456\",\r\n  \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/user-auth-service/api/v1/user/update"
+					},
+					"response": []
+				},
+				{
+					"name": "Get a Spot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"bookingId\": \"\",\r\n  \"vehicleId\": \"VEH123\",\r\n  \"parkingSpaceId\": 103,\r\n  \"userEmail\": \"jone@example.com\",\r\n  \"reservedAt\": \"2025-06-24T16:30:00\",\r\n  \"releasedAt\": \"2025-06-24T17:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/user-auth-service/api/v1/bookLog/add"
+					},
+					"response": []
+				},
+				{
+					"name": "Get All Bookings",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8080/user-auth-service/api/v1/bookLog/allBookings"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Vehicle",
+			"item": [
+				{
+					"name": "Add Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"\",\r\n  \"userEmail\": \"jone@example.com\",\r\n  \"plateNumber\": \"BFN-3245\",\r\n  \"model\": \"Yamaha FZ-v2\",\r\n  \"isParked\": false\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/vehicle-service/api/v1/vehicle/addVehicle"
+					},
+					"response": []
+				},
+				{
+					"name": "Park Vehicle",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"userEmail\": \"jonei@example.com\",\r\n  \"plateNumber\": \"BFN-3244\",\r\n  \"model\": \"Yamaha FZ-v2\",\r\n  \"parked\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/vehicle-service/api/v1/vehicle/parkVehicle"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Parking",
+			"item": [
+				{
+					"name": "Park Space Create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"\",\r\n  \"spotNumber\": 103,\r\n  \"location\": \"Block A - Level 1\",\r\n  \"isAvailable\": true,\r\n  \"userEmail\": \"gihan@example.com\",\r\n  \"zone\": \"colombo\"\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/parking-service/api/v1/parkingSpace/createSpace"
+					},
+					"response": []
+				},
+				{
+					"name": "Set Spot Available",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"\",\r\n  \"spotNumber\": 101,\r\n  \"location\": \"Block A - Level 1\",\r\n  \"available\": true,\r\n  \"userEmail\": \"gihan@example.com\",\r\n  \"zone\": \"colombo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8084/parking-service/api/v1/parkingSpace/setAvailableParkingSpace"
+					},
+					"response": []
+				},
+				{
+					"name": "Get all space",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "http://localhost:8084/parking-service/api/v1/parkingSpace/allSpaces"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PaymentService",
+			"item": [
+				{
+					"name": "Make a Payment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"paymentId\": \"\",\r\n  \"bookingId\": 2,\r\n  \"amount\": 2500.75,\r\n  \"status\": \"PAID\",\r\n  \"paidAt\": \"2025-06-25T10:30:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/payment-service/api/v1/payment/paymentSaveAndGetReceipt"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
