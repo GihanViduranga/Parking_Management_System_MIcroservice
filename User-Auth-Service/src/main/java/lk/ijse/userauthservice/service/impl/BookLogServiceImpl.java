@@ -61,4 +61,14 @@ public class BookLogServiceImpl implements BookLogService {
         return modelMapper.map(bookLogRepo.findAll(),
                 new TypeToken<List<BookLogDTO>>() {}.getType());
     }
+
+    @Override
+    public boolean getBookingId(int bookingId) {
+        boolean isBookingIdExists = bookLogRepo.existsById(String.valueOf(bookingId));
+        if (isBookingIdExists) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

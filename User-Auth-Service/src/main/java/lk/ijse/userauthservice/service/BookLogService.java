@@ -16,4 +16,5 @@ public interface BookLogService {
 
     List<BookLogDTO> getAllBookings();
 
+    boolean getBookingId(int bookingId);
 }

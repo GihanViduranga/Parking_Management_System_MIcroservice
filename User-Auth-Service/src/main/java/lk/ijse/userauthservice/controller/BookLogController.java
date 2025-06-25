@@ -44,4 +44,37 @@ public class BookLogController {
                     .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
         }
     }
+
+    /*@GetMapping("/getBookingId/{bookingId}")
+    public ResponseEntity<ResponseDTO> getBookingId(@RequestBody int bookingId){
+        try {
+            boolean isBookingIdExists = bookLogService.getBookingId(bookingId);
+            if (isBookingIdExists) {
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(new ResponseDTO(VarList.Found, "Booking Id exists", true));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "Booking Id does not exist", false));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }*/
+
+    @GetMapping("/getBookingId/{bookingId}")
+    public ResponseEntity<ResponseDTO> getBookingId(@PathVariable int bookingId) {
+        try {
+            boolean isBookingIdExists = bookLogService.getBookingId(bookingId);
+            if (isBookingIdExists) {
+                return ResponseEntity.ok(new ResponseDTO(VarList.Found, "Booking Id exists", true));
+            } else {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                        .body(new ResponseDTO(VarList.Not_Found, "Booking Id does not exist", false));
+            }
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+        }
+    }
 }
