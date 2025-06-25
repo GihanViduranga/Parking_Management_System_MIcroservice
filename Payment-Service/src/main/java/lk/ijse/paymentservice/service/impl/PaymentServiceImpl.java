@@ -27,15 +27,16 @@ public class PaymentServiceImpl implements PaymentService {
     private ModelMapper modelMapper;
 
     @Override
-    public boolean savePayment(PaymentDTO paymentDTO) {
+    public PaymentDTO savePayment(PaymentDTO paymentDTO) {
         int bookingId = paymentDTO.getBookingId();
         boolean isValidBookingId = checkBookingId(bookingId);
 
         if (!isValidBookingId) {
-            return false;
+            throw new IllegalArgumentException("Invalid booking ID: " + bookingId);
         }
-        paymentRepo.save(modelMapper.map(paymentDTO, Payment.class));
-        return true;
+        Payment payment = modelMapper.map(paymentDTO, Payment.class);
+        Payment savePayment = paymentRepo.save(payment);
+        return modelMapper.map(savePayment, PaymentDTO.class);
     }
 
     private boolean checkBookingId(int bookingId) {

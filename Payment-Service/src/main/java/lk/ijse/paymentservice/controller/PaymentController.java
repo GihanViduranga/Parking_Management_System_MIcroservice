@@ -24,15 +24,13 @@ public class PaymentController {
     @Autowired
     private PaymentService paymentService;
 
-    @PostMapping("/paymentSave")
-    public ResponseEntity<ResponseDTO> paymentSave(@RequestBody PaymentDTO paymentDTO){
+    @PostMapping("/paymentSaveAndGetReceipt")
+    public ResponseEntity<PaymentDTO> paymentSave(@RequestBody PaymentDTO paymentDTO){
         try {
-            paymentService.savePayment(paymentDTO);
-            return ResponseEntity.status(HttpStatus.OK)
-                    .body(new ResponseDTO(VarList.Created, "Payment Successful", null));
+            PaymentDTO savedPayment = paymentService.savePayment(paymentDTO);
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedPayment);
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(new ResponseDTO(VarList.Internal_Server_Error, e.getMessage(), null));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }
     }
 }
