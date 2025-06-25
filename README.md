@@ -2,4 +2,5 @@
 
 ## 📸 Project Screenshot
 
-![Dashboard Screenshot](docs/EurekaServerDashboard/img.png)
+![Eureka Dashboard](https://raw.githubusercontent.com/GihanViduranga/Parking_Management_System_MIcroservice/main/doc/EurekaServerDashboard/img.png)
+
